@@ -1,0 +1,36 @@
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+
+html, body { width:500; height:500; } /* just to be sure these are full screen*/
+
+canvas { display:block; } /* To remove the scrollbars */
+
+canvas {
+    background: #000;
+}
+
+#input {
+	width: 246px;
+}
+
+#chatWindowWrap {
+	width: 250px;
+	height: 500px;
+    position: fixed;
+	display: block;
+	left:520px;
+	top: 0px;
+}
+
+#box {
+	width: 246px;
+	height: 480px;
+	overflow: hidden;
+}
+
+#nickInput {
+	width: 250px;
+    position: fixed;
+	display: block;
+	left:520px;
+	top: 500px;
+}
