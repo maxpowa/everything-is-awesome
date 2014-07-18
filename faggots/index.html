@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Text -> Faggot Converter</title>
+<meta name="author" content="Max Gurela">
+<meta name="illustrator" content="theFlaxbeard">
+<style>
+body
+{
+	background-image: url("noise.png");
+	background-repeat: repeat;
+	color: black;
+	font-family: "Trebuchet MS", sans-serif;
+} 
+
+textarea
+{
+	font-family: "Trebuchet MS", sans-serif;
+	-webkit-border-radius: 15px;  
+    -moz-border-radius: 15px;  
+    border-radius: 15px; 
+	box-shadow: 0px 0px 5px #888888;
+	padding: 10px;
+}
+
+#main
+{
+	width:500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+h1
+{
+	color: black;
+	position: relative;
+	text-align: center;
+	padding: 15px;
+	-webkit-border-radius: 30px;  
+    -moz-border-radius: 30px;  
+    border-radius: 30px; 
+	background: #E27CE2;  
+    background: -webkit-gradient(linear, left top, left bottombottom, color-stop(31%,#E27CE2), color-stop(100%,#D140D1));  
+    background: -webkit-linear-gradient(top,  #E27CE2 31%,#D140D1 100%);  
+    background: -moz-linear-gradient(top,  #E27CE2 31%, #D140D1 100%);  
+    background: -o-linear-gradient(top,  #E27CE2 31%,#D140D1 100%);  
+    background: -ms-linear-gradient(top,  #E27CE2 31%,#D140D1 100%);  
+    background: linear-gradient(to bottombottom,  #E27CE2 31%,#D140D1 100%);  
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E27CE2', endColorstr='#D140D1',GradientType=0 );
+	border: 1px solid #545454;
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.25);
+	box-shadow: 0px 0px 5px #888888;
+}
+
+#content {
+	color: black;
+	position: relative;
+	text-align: center;
+	padding: 15px;
+	-webkit-border-radius: 30px;  
+    -moz-border-radius: 30px;  
+	background: #F4F4F4;  
+	border: 1px solid #B7B7B7;
+	box-shadow: 0px 0px 5px #888888;
+}
+
+h1:before {  
+	z-index: 1;  
+    content: "";  
+    width: 490px;  
+    height: 50px;  
+  
+    display: block;  
+    position: absolute;  
+	left: 4px;
+	top: 0px;
+  
+    -webkit-border-radius: 25px;  
+    -moz-border-radius: 25px;  
+    border-radius: 25px;  
+  
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 8%, rgba(255,255,255,0) 100%);  
+    background: -webkit-gradient(linear, left top, left bottombottom, color-stop(0%,rgba(255,255,255,1)), color-stop(8%,rgba(255,255,255,0.7)), color-stop(100%,rgba(255,255,255,0)));  
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 8%,rgba(255,255,255,0) 100%);  
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 8%,rgba(255,255,255,0) 100%);  
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 8%,rgba(255,255,255,0) 100%);  
+    background: linear-gradient(to bottombottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 8%,rgba(255,255,255,0) 100%);  
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );  
+}  
+</style>
+<script>
+
+var ranges = [
+  { divider: 1e24 , prefix: ' yotta' },
+  { divider: 1e21 , prefix: ' zetta' },
+  { divider: 1e18 , prefix: ' exa' },
+  { divider: 1e15 , prefix: ' peta' },
+  { divider: 1e12 , prefix: ' tera' },
+  { divider: 1e9 , prefix: ' giga' },
+  { divider: 1e6 , prefix: ' mega' },
+  { divider: 1e3 , prefix: ' kilo' },
+  { divider: 1e0 , prefix: ' ' },
+  { divider: 1e-3 , prefix: ' milli' },
+  { divider: 1e-6 , prefix: ' micro' },
+  { divider: 1e-9 , prefix: ' nano' },
+  { divider: 1e-12 , prefix: ' pico' },
+  { divider: 1e-15 , prefix: ' femto' },
+  { divider: 1e-18 , prefix: ' atto' },
+  { divider: 1e-21 , prefix: ' zepto' },
+  { divider: 1e-24 , prefix: ' yocto' },
+  { divider: 1e-25 , prefix: 'e-1 yocto' },
+  { divider: 1e-26 , prefix: 'e-2 yocto' },
+  { divider: 1e-27 , prefix: 'e-3 yocto' }
+];
+
+/**
+ * Return the SI prefix string that matches with the given number
+ *
+ * @param   int
+ * @return  string
+ */
+function formatNumber(n) {
+  for (var i = 0; i < ranges.length; i++) {
+    if (n >= ranges[i].divider) {
+      return (n / ranges[i].divider).toFixed(5).toString() + ranges[i].prefix;
+    }
+  }
+  return n.toString();
+}
+
+/**
+ * As advertised, converts a number of bytes to faggots
+ *
+ * @param   int
+ * @return  int
+ */
+function bytesToFaggots(n) {
+    return n*6.74074074e-27;
+}
+
+/**
+ * Count bytes in a string's UTF-8 representation.
+ * 
+ * Taken from: http://codereview.stackexchange.com/a/37552
+ *
+ * @param   string
+ * @return  int
+ */
+function getByteLen(normal_val) {
+    // Force string type
+    normal_val = String(normal_val);
+
+    var byteLen = 0;
+    for (var i = 0; i < normal_val.length; i++) {
+        var c = normal_val.charCodeAt(i);
+        byteLen += c < (1 <<  7) ? 1 :
+                   c < (1 << 11) ? 2 :
+                   c < (1 << 16) ? 3 :
+                   c < (1 << 21) ? 4 :
+                   c < (1 << 26) ? 5 :
+                   c < (1 << 31) ? 6 : Number.NaN;
+    }
+    return byteLen;
+}
+
+function setResultText() {
+    var area = document.getElementById('textarea');
+    document.getElementById("result").innerHTML = formatNumber(bytesToFaggots(getByteLen(area.value))) + "faggots";
+}
+</script>
+</head>
+<body onload="setResultText()">
+<div id="main">
+<h1>Text -> Faggot Converter</h1>
+<div id="content">
+Convert any amount of text to the equivalent amount of faggots.
+
+<br><br><textarea id="textarea" rows="8" cols="65">
+Seriously, just put any text in here and see how many faggots it is.
+</textarea> 
+
+<p id="result"></p>
+
+<a href="http://superuser.com/a/11465">Sour</a><a href="http://books.google.com/books?id=0l_k-XMIiQIC&pg=PA125&lpg=PA125#v=onepage&q=120%20lbs&f=false">ces</a>
+</div>
+</div>
+
+<script>
+var area = document.getElementById('textarea');
+if (area.addEventListener) {
+  area.addEventListener('input', function() {
+    setResultText();
+  }, false);
+} else if (area.attachEvent) {
+  area.attachEvent('onpropertychange', function() {
+    setResultText();
+  });
+}
+</script>
+
+</body>
+</html> 
